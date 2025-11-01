@@ -1,0 +1,263 @@
+/* =========================================================
+   LeaderTech — Dark Luxury Theme (v2 per new spec)
+   Clean, responsive, semantic. All TBDs marked in comments.
+   ========================================================= */
+
+:root{
+  /* Colors */
+  --bg: #0B0C0F;                /* near-black */
+  --bg-elev-1:#12141A;          /* elevated dark (cards/modal) */
+  --bg-elev-2:#1A1D24;
+  --text:#FAFAFF;               /* soft white */
+  --muted:#B8BCCD;              /* muted copy */
+  --border:rgba(255,255,255,0.08);
+  --shadow:rgba(0,0,0,0.6);
+
+  --accent:#FFFFFF;             /* CTA background */
+  --accent-text:#0B0C0F;        /* CTA text */
+
+  --light-section-bg:#E9EEF5;   /* quote section */
+  --light-text:#0B0D12;
+
+  /* Layout */
+  --container:1200px;
+  --radius-sm:8px;
+  --radius-md:14px;
+  --radius-lg:22px;
+
+  /* Spacing scale */
+  --s-1:6px; --s-2:10px; --s-3:14px; --s-4:18px; --s-5:24px;
+  --s-6:32px; --s-7:40px; --s-8:56px; --s-9:72px; --s-10:96px;
+
+  /* Typography */
+  --serif:"Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
+  --sans:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+  --lh:1.6;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:400 16px/var(--lh) var(--sans);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+img{max-width:100%; height:auto; display:block}
+a{color:inherit; text-decoration:none}
+a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid #7ea6ff; outline-offset:3px; border-radius:6px}
+p{margin:0 0 var(--s-4)}
+h1,h2,h3,h4{margin:0 0 var(--s-4)}
+
+.container{width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--s-5)}
+.container.narrow{max-width:880px}
+
+/* Skip link */
+.skip-link{
+  position:absolute; left:-9999px; top:auto;
+  background:#fff; color:#000; padding:8px 12px; z-index:9999;
+}
+.skip-link:focus{left:12px; top:12px;}
+
+/* ======================= Header ======================= */
+.site-header{
+  position:sticky; top:0; z-index:1000;
+  backdrop-filter:saturate(150%) blur(8px);
+  background:color-mix(in oklab, var(--bg) 88%, black);
+  border-bottom:1px solid var(--border);
+}
+.header-inner{
+  display:flex; align-items:center; gap:var(--s-5);
+  min-height:62px;
+}
+.logo{display:flex; align-items:center; gap:10px; font-weight:700}
+.logo-mark{
+  display:inline-grid; place-items:center;
+  width:28px; height:28px; border-radius:8px;
+  background:#fff; color:#000; font-weight:800; letter-spacing:0.5px;
+}
+.logo-text{letter-spacing:0.5px}
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 18px; border-radius:999px; font-weight:600; letter-spacing:.2px; transition:transform .12s ease, box-shadow .12s ease, opacity .2s ease;
+  border:1px solid transparent;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn-primary{background:var(--accent); color:var(--accent-text); box-shadow:0 6px 20px rgba(255,255,255,.05)}
+.btn-secondary{background:#fff; color:#000; opacity:.92}
+.btn-cta{background:#fff; color:#000; padding:10px 16px; margin-left:auto}
+
+/* ======================= Sections ======================= */
+.section{padding:var(--s-9) 0}
+.section-title.serif{font-family:var(--serif); font-size:clamp(28px, 4vw, 44px); line-height:1.2}
+.section-subtitle{color:var(--muted); font-size:clamp(15px, 1.8vw, 18px)}
+.center{text-align:center}
+
+/* ======================= Hero ======================= */
+.hero{padding-top:var(--s-10)}
+.hero-title{
+  font-family:var(--serif);
+  font-weight:800;
+  font-size:clamp(42px, 7vw, 72px);
+  line-height:1.1;
+  text-align:center;
+  letter-spacing:-0.4px;
+}
+.hero-subtitle{text-align:center; margin-top:var(--s-3); color:#CBD0E2; font-size:clamp(16px, 2.2vw, 20px)}
+.hero-cta{margin-top:var(--s-5); text-align:center}
+
+/* ======================= EA Part ======================= */
+.ea .logo-carousel{
+  position:relative; overflow:hidden; border:1px solid var(--border);
+  background:var(--bg-elev-1); border-radius:16px; padding:18px;
+}
+.carousel-track{
+  display:flex; align-items:center; gap:54px; padding:8px 24px;
+  animation:scroll-left 28s linear infinite; /* right → left */
+}
+.logo-carousel:hover .carousel-track{animation-play-state:paused}
+.carousel-track img{height:36px; opacity:.9; filter:grayscale(100%) contrast(120%) brightness(110%); transition:filter .2s ease, opacity .2s ease}
+.carousel-track img:hover{filter:grayscale(0%); opacity:1}
+@keyframes scroll-left{from{transform:translateX(0)} to{transform:translateX(-100%)}}
+
+/* ======================= Modal (shared) ======================= */
+.modal{
+  margin-top:var(--s-6);
+  background:linear-gradient(180deg, var(--bg-elev-1), color-mix(in oklab, var(--bg-elev-1) 70%, black));
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:0 20px 60px var(--shadow);
+  padding:var(--s-6);
+}
+.modal-head{text-align:center; margin-bottom:var(--s-6)}
+.modal-title{font-size:clamp(18px, 2.2vw, 24px); font-weight:700}
+
+/* Solutions grid */
+.solutions-grid{
+  display:grid; gap:var(--s-5);
+  grid-template-columns:repeat(4, minmax(0, 1fr));
+}
+@media (max-width: 1100px){ .solutions-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}}
+@media (max-width: 760px){ .solutions-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}}
+@media (max-width: 520px){ .solutions-grid{grid-template-columns:1fr}}
+
+.solution-card{
+  background:var(--bg-elev-2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .2s ease;
+}
+.solution-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 40px rgba(0,0,0,.5);
+  border-color:rgba(255,255,255,0.14);
+}
+.solution-card img{height:46px; margin-bottom:12px; opacity:.95}
+.solution-title{font-size:18px; margin:0 0 6px}
+.solution-desc{color:var(--muted); font-size:14px}
+
+/* ======================= Mind (text-only modal) ======================= */
+.modal-body{margin-top:var(--s-4)}
+.modal-bottom-subhead{
+  color:#C7CBDA;
+  max-width:760px; margin:0 auto;
+}
+
+/* ======================= Consulting ======================= */
+.consulting .consulting-columns{
+  margin-top:var(--s-4);
+  display:flex; align-items:stretch; gap:0;
+  background:var(--bg-elev-2); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+  /* right-to-left visual order per spec */
+  flex-direction:row-reverse;
+}
+.consulting .col{flex:1; padding:24px}
+.consulting .col h4{margin:0 0 8px; font-size:18px}
+.consulting .col p{color:var(--muted)}
+.consulting .divider{
+  width:1px; background:linear-gradient(180deg, transparent, rgba(255,255,255,0.08), transparent);
+}
+
+/* Mobile stacking */
+@media (max-width: 760px){
+  .consulting .consulting-columns{flex-direction:column; gap:1px}
+  .consulting .divider{display:none}
+  .consulting .col + .col{border-top:1px solid var(--border)}
+}
+
+/* ======================= Expert Quote ======================= */
+.quote{
+  background:var(--light-section-bg);
+  color:var(--light-text);
+  padding:var(--s-9) 0;
+}
+.quote-grid{
+  display:grid; align-items:center; gap:var(--s-7);
+  grid-template-columns:1fr 1.4fr;
+}
+@media (max-width: 900px){
+  .quote-grid{grid-template-columns:1fr; text-align:center}
+  .quote-block footer{text-align:center}
+}
+.quote-image img{
+  width:min(100%, 520px); margin:0 auto;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(10,15,20,.15);
+}
+.quote-block p{
+  font-family:var(--serif);
+  font-size:clamp(22px, 3.2vw, 34px);
+  line-height:1.3; position:relative; margin:0 0 12px;
+}
+.quote-glyph{font-size:1.4em; line-height:0; margin-right:6px; opacity:.35}
+.quote-block footer{color:#3B4250; font-size:15px}
+
+/* ======================= Footer ======================= */
+.site-footer{border-top:1px solid var(--border); background:var(--bg)}
+.footer-top{
+  display:grid; grid-template-columns:1.1fr 1.3fr; gap:var(--s-7);
+  padding:var(--s-8) 0 var(--s-6);
+}
+.footer-left .footer-logo{margin-bottom:10px}
+.footer-slogan{color:var(--muted)}
+.footer-right{
+  display:grid; grid-template-columns:1fr 1fr; gap:var(--s-6);
+}
+.footer-col h4{font-size:14px; letter-spacing:.4px; text-transform:uppercase; color:#DDE1F1; margin:0 0 10px}
+.footer-col ul{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.footer-col a{color:#D0D5E6}
+.footer-col a:hover{text-decoration:underline}
+.footer-cta .btn{width:100%}
+
+.footer-bottom{
+  border-top:1px solid var(--border);
+  padding:14px 0 var(--s-6);
+  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
+  color:#AEB4C8; font-size:14px;
+}
+.legal, .social{list-style:none; display:flex; gap:12px; margin:0 0 0 auto; padding:0}
+.legal .sep{opacity:.5}
+.social a svg{width:20px; height:20px; fill:#C9CEE0}
+.social a:hover svg{fill:#fff}
+
+@media (max-width: 920px){
+  .footer-top{grid-template-columns:1fr}
+  .footer-right{grid-template-columns:1fr; gap:var(--s-5)}
+}
+@media (max-width: 620px){
+  .footer-bottom{flex-direction:column; align-items:flex-start}
+  .legal, .social{margin-left:0}
+}
+
+/* ----------------------- Notes -----------------------
+ - Replace all assets in /assets/... with your real files (logos, images).
+ - Center/Primary nav is intentionally not rendered; structure kept in HTML comments.
+ - Carousel is CSS-animated (right→left), pauses on hover. Touch-drag TBD.
+ - Typos preserved where present in content (e.g., "Proffesionals", "Standford").
+------------------------------------------------------ */
