@@ -1,263 +1,368 @@
-/* =========================================================
-   LeaderTech — Dark Luxury Theme (v2 per new spec)
-   Clean, responsive, semantic. All TBDs marked in comments.
-   ========================================================= */
-
-:root{
-  /* Colors */
-  --bg: #0B0C0F;                /* near-black */
-  --bg-elev-1:#12141A;          /* elevated dark (cards/modal) */
-  --bg-elev-2:#1A1D24;
-  --text:#FAFAFF;               /* soft white */
-  --muted:#B8BCCD;              /* muted copy */
-  --border:rgba(255,255,255,0.08);
-  --shadow:rgba(0,0,0,0.6);
-
-  --accent:#FFFFFF;             /* CTA background */
-  --accent-text:#0B0C0F;        /* CTA text */
-
-  --light-section-bg:#E9EEF5;   /* quote section */
-  --light-text:#0B0D12;
-
-  /* Layout */
-  --container:1200px;
-  --radius-sm:8px;
-  --radius-md:14px;
-  --radius-lg:22px;
-
-  /* Spacing scale */
-  --s-1:6px; --s-2:10px; --s-3:14px; --s-4:18px; --s-5:24px;
-  --s-6:32px; --s-7:40px; --s-8:56px; --s-9:72px; --s-10:96px;
-
-  /* Typography */
-  --serif:"Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
-  --sans:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  --lh:1.6;
+/* ===========================
+   Base
+   =========================== */
+:root {
+  --bg: #0b0c0f;
+  --bg-elev-1: #12141a;
+  --bg-elev-2: #181b23;
+  --text: #f8f8fd;
+  --muted: #b7bccd;
+  --gold: #d6b465;
+  --border: rgba(255, 255, 255, 0.06);
+  --container: 1180px;
+  --radius: 16px;
+  --shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+  --serif: "Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
+  --sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font:400 16px/var(--lh) var(--sans);
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-img{max-width:100%; height:auto; display:block}
-a{color:inherit; text-decoration:none}
-a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid #7ea6ff; outline-offset:3px; border-radius:6px}
-p{margin:0 0 var(--s-4)}
-h1,h2,h3,h4{margin:0 0 var(--s-4)}
-
-.container{width:100%; max-width:var(--container); margin:0 auto; padding:0 var(--s-5)}
-.container.narrow{max-width:880px}
-
-/* Skip link */
-.skip-link{
-  position:absolute; left:-9999px; top:auto;
-  background:#fff; color:#000; padding:8px 12px; z-index:9999;
-}
-.skip-link:focus{left:12px; top:12px;}
-
-/* ======================= Header ======================= */
-.site-header{
-  position:sticky; top:0; z-index:1000;
-  backdrop-filter:saturate(150%) blur(8px);
-  background:color-mix(in oklab, var(--bg) 88%, black);
-  border-bottom:1px solid var(--border);
-}
-.header-inner{
-  display:flex; align-items:center; gap:var(--s-5);
-  min-height:62px;
-}
-.logo{display:flex; align-items:center; gap:10px; font-weight:700}
-.logo-mark{
-  display:inline-grid; place-items:center;
-  width:28px; height:28px; border-radius:8px;
-  background:#fff; color:#000; font-weight:800; letter-spacing:0.5px;
-}
-.logo-text{letter-spacing:0.5px}
-
-.btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:12px 18px; border-radius:999px; font-weight:600; letter-spacing:.2px; transition:transform .12s ease, box-shadow .12s ease, opacity .2s ease;
-  border:1px solid transparent;
-}
-.btn:hover{transform:translateY(-1px)}
-.btn:active{transform:translateY(0)}
-.btn-primary{background:var(--accent); color:var(--accent-text); box-shadow:0 6px 20px rgba(255,255,255,.05)}
-.btn-secondary{background:#fff; color:#000; opacity:.92}
-.btn-cta{background:#fff; color:#000; padding:10px 16px; margin-left:auto}
-
-/* ======================= Sections ======================= */
-.section{padding:var(--s-9) 0}
-.section-title.serif{font-family:var(--serif); font-size:clamp(28px, 4vw, 44px); line-height:1.2}
-.section-subtitle{color:var(--muted); font-size:clamp(15px, 1.8vw, 18px)}
-.center{text-align:center}
-
-/* ======================= Hero ======================= */
-.hero{padding-top:var(--s-10)}
-.hero-title{
-  font-family:var(--serif);
-  font-weight:800;
-  font-size:clamp(42px, 7vw, 72px);
-  line-height:1.1;
-  text-align:center;
-  letter-spacing:-0.4px;
-}
-.hero-subtitle{text-align:center; margin-top:var(--s-3); color:#CBD0E2; font-size:clamp(16px, 2.2vw, 20px)}
-.hero-cta{margin-top:var(--s-5); text-align:center}
-
-/* ======================= EA Part ======================= */
-.ea .logo-carousel{
-  position:relative; overflow:hidden; border:1px solid var(--border);
-  background:var(--bg-elev-1); border-radius:16px; padding:18px;
-}
-.carousel-track{
-  display:flex; align-items:center; gap:54px; padding:8px 24px;
-  animation:scroll-left 28s linear infinite; /* right → left */
-}
-.logo-carousel:hover .carousel-track{animation-play-state:paused}
-.carousel-track img{height:36px; opacity:.9; filter:grayscale(100%) contrast(120%) brightness(110%); transition:filter .2s ease, opacity .2s ease}
-.carousel-track img:hover{filter:grayscale(0%); opacity:1}
-@keyframes scroll-left{from{transform:translateX(0)} to{transform:translateX(-100%)}}
-
-/* ======================= Modal (shared) ======================= */
-.modal{
-  margin-top:var(--s-6);
-  background:linear-gradient(180deg, var(--bg-elev-1), color-mix(in oklab, var(--bg-elev-1) 70%, black));
-  border:1px solid var(--border);
-  border-radius:16px;
-  box-shadow:0 20px 60px var(--shadow);
-  padding:var(--s-6);
-}
-.modal-head{text-align:center; margin-bottom:var(--s-6)}
-.modal-title{font-size:clamp(18px, 2.2vw, 24px); font-weight:700}
-
-/* Solutions grid */
-.solutions-grid{
-  display:grid; gap:var(--s-5);
-  grid-template-columns:repeat(4, minmax(0, 1fr));
-}
-@media (max-width: 1100px){ .solutions-grid{grid-template-columns:repeat(3, minmax(0, 1fr))}}
-@media (max-width: 760px){ .solutions-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}}
-@media (max-width: 520px){ .solutions-grid{grid-template-columns:1fr}}
-
-.solution-card{
-  background:var(--bg-elev-2);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:18px;
-  transition:transform .15s ease, box-shadow .15s ease, border-color .2s ease;
-}
-.solution-card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 14px 40px rgba(0,0,0,.5);
-  border-color:rgba(255,255,255,0.14);
-}
-.solution-card img{height:46px; margin-bottom:12px; opacity:.95}
-.solution-title{font-size:18px; margin:0 0 6px}
-.solution-desc{color:var(--muted); font-size:14px}
-
-/* ======================= Mind (text-only modal) ======================= */
-.modal-body{margin-top:var(--s-4)}
-.modal-bottom-subhead{
-  color:#C7CBDA;
-  max-width:760px; margin:0 auto;
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 16px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ======================= Consulting ======================= */
-.consulting .consulting-columns{
-  margin-top:var(--s-4);
-  display:flex; align-items:stretch; gap:0;
-  background:var(--bg-elev-2); border:1px solid var(--border); border-radius:14px; overflow:hidden;
-  /* right-to-left visual order per spec */
-  flex-direction:row-reverse;
-}
-.consulting .col{flex:1; padding:24px}
-.consulting .col h4{margin:0 0 8px; font-size:18px}
-.consulting .col p{color:var(--muted)}
-.consulting .divider{
-  width:1px; background:linear-gradient(180deg, transparent, rgba(255,255,255,0.08), transparent);
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* Mobile stacking */
-@media (max-width: 760px){
-  .consulting .consulting-columns{flex-direction:column; gap:1px}
-  .consulting .divider{display:none}
-  .consulting .col + .col{border-top:1px solid var(--border)}
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* ======================= Expert Quote ======================= */
-.quote{
-  background:var(--light-section-bg);
-  color:var(--light-text);
-  padding:var(--s-9) 0;
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  background: #fff;
+  color: #000;
+  padding: 8px 12px;
+  z-index: 10000;
 }
-.quote-grid{
-  display:grid; align-items:center; gap:var(--s-7);
-  grid-template-columns:1fr 1.4fr;
-}
-@media (max-width: 900px){
-  .quote-grid{grid-template-columns:1fr; text-align:center}
-  .quote-block footer{text-align:center}
-}
-.quote-image img{
-  width:min(100%, 520px); margin:0 auto;
-  border-radius:14px;
-  box-shadow:0 12px 30px rgba(10,15,20,.15);
-}
-.quote-block p{
-  font-family:var(--serif);
-  font-size:clamp(22px, 3.2vw, 34px);
-  line-height:1.3; position:relative; margin:0 0 12px;
-}
-.quote-glyph{font-size:1.4em; line-height:0; margin-right:6px; opacity:.35}
-.quote-block footer{color:#3B4250; font-size:15px}
-
-/* ======================= Footer ======================= */
-.site-footer{border-top:1px solid var(--border); background:var(--bg)}
-.footer-top{
-  display:grid; grid-template-columns:1.1fr 1.3fr; gap:var(--s-7);
-  padding:var(--s-8) 0 var(--s-6);
-}
-.footer-left .footer-logo{margin-bottom:10px}
-.footer-slogan{color:var(--muted)}
-.footer-right{
-  display:grid; grid-template-columns:1fr 1fr; gap:var(--s-6);
-}
-.footer-col h4{font-size:14px; letter-spacing:.4px; text-transform:uppercase; color:#DDE1F1; margin:0 0 10px}
-.footer-col ul{list-style:none; margin:0; padding:0; display:grid; gap:8px}
-.footer-col a{color:#D0D5E6}
-.footer-col a:hover{text-decoration:underline}
-.footer-cta .btn{width:100%}
-
-.footer-bottom{
-  border-top:1px solid var(--border);
-  padding:14px 0 var(--s-6);
-  display:flex; align-items:center; gap:18px; flex-wrap:wrap;
-  color:#AEB4C8; font-size:14px;
-}
-.legal, .social{list-style:none; display:flex; gap:12px; margin:0 0 0 auto; padding:0}
-.legal .sep{opacity:.5}
-.social a svg{width:20px; height:20px; fill:#C9CEE0}
-.social a:hover svg{fill:#fff}
-
-@media (max-width: 920px){
-  .footer-top{grid-template-columns:1fr}
-  .footer-right{grid-template-columns:1fr; gap:var(--s-5)}
-}
-@media (max-width: 620px){
-  .footer-bottom{flex-direction:column; align-items:flex-start}
-  .legal, .social{margin-left:0}
+.skip-link:focus {
+  left: 10px;
+  top: 10px;
 }
 
-/* ----------------------- Notes -----------------------
- - Replace all assets in /assets/... with your real files (logos, images).
- - Center/Primary nav is intentionally not rendered; structure kept in HTML comments.
- - Carousel is CSS-animated (right→left), pauses on hover. Touch-drag TBD.
- - Typos preserved where present in content (e.g., "Proffesionals", "Standford").
------------------------------------------------------- */
+/* ===========================
+   Top bar
+   =========================== */
+.top-bar {
+  background: rgba(214, 180, 101, 0.08);
+  color: var(--gold);
+  text-align: center;
+  padding: 10px 14px 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 14px;
+}
+
+/* ===========================
+   Header
+   =========================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  backdrop-filter: blur(8px);
+  background: rgba(11, 12, 15, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.015);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 22px;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 60px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 600;
+}
+
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 9px;
+  background: #fff;
+  color: #000;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.logo-text {
+  letter-spacing: 0.04em;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #000;
+  padding: 9px 18px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-cta {
+  margin-left: auto;
+}
+
+/* Hide future nav (kept in source) */
+.primary-nav {
+  display: none;
+}
+
+/* ===========================
+   Sections
+   =========================== */
+.section {
+  padding: 70px 0;
+}
+
+.section-title {
+  margin: 0 0 10px;
+  font-size: clamp(30px, 4.5vw, 44px);
+  line-height: 1.1;
+}
+
+.serif {
+  font-family: var(--serif);
+}
+
+.center {
+  text-align: center;
+}
+
+.section-subtitle {
+  color: var(--muted);
+  margin-bottom: 42px;
+}
+
+/* ===========================
+   Hero
+   =========================== */
+.hero {
+  padding-top: 76px;
+  padding-bottom: 58px;
+}
+
+.narrow {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: clamp(48px, 6.5vw, 70px);
+  text-align: center;
+  letter-spacing: -0.015em;
+}
+
+.hero-subtitle {
+  margin-top: 16px;
+  text-align: center;
+  /* Recoleta-ish fallback */
+  font-family: "Recoleta", "Playfair Display", var(--sans);
+  font-size: 19px;
+  color: rgba(247, 247, 255, 0.75);
+}
+
+/* ===========================
+   Part 2 — Real Estate OS
+   =========================== */
+.os {
+  background: radial-gradient(circle at top, rgba(214, 180, 101, 0.08), transparent 45%), var(--bg);
+}
+
+.os-split {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 26px;
+  align-items: stretch;
+  margin-bottom: 44px;
+}
+
+.os-left {
+  background: rgba(10, 11, 15, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  padding: 26px 22px 22px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.16);
+}
+.os-left-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.os-left-subtitle {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+.os-image-placeholder {
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.16);
+  border-radius: 12px;
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  padding: 12px;
+}
+
+.os-right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.os-block {
+  background: rgba(17, 18, 22, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: 14px;
+  padding: 18px 16px 16px;
+}
+.os-block h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+.os-block p {
+  margin: 0;
+  color: rgba(238, 239, 246, 0.7);
+  font-size: 14px;
+}
+
+/* 4 cards row */
+.os-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.os-card {
+  background: rgba(12, 13, 17, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.015);
+  border-radius: 14px;
+  padding: 16px;
+  transition: transform 0.12s ease, border 0.12s ease;
+}
+.os-card:hover {
+  transform: translateY(-3px);
+  border: 1px solid rgba(214, 180, 101, 0.28);
+}
+.os-card-img {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  height: 78px;
+  margin-bottom: 14px;
+}
+.os-card h5 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+.os-card p {
+  margin: 0;
+  font-size: 13.7px;
+  color: rgba(240, 241, 247, 0.6);
+}
+
+/* ===========================
+   Part 3 — Elite AI Consulting
+   =========================== */
+.consulting {
+  background: var(--bg);
+  padding-bottom: 90px;
+}
+.section-subtitle.light {
+  color: rgba(242, 243, 246, 0.55);
+}
+.consulting-cards {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.consult-card {
+  background: rgba(13, 14, 18, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.015);
+  border-radius: 14px;
+  padding: 20px 18px 22px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+}
+.consult-card h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.consult-card p {
+  margin: 0;
+  color: rgba(232, 233, 238, 0.55);
+  font-size: 14px;
+}
+
+/* ===========================
+   Responsive
+   =========================== */
+@media (max-width: 960px) {
+  .os-split {
+    grid-template-columns: 1fr;
+  }
+  .os-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .consulting-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-title {
+    font-size: 44px;
+  }
+  .hero-subtitle {
+    font-size: 16.5px;
+  }
+  .os-cards {
+    grid-template-columns: 1fr;
+  }
+  .header-inner {
+    gap: 10px;
+  }
+  .btn-cta {
+    padding-inline: 14px;
+  }
+}
